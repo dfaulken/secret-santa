@@ -24,7 +24,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 set :linked_files, fetch(:linked_files, []).push(
   'config/application.yml',
-  'config/database.yml'
+  'config/database.yml',
   'config/secrets.yml'
 )
 
