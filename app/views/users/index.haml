@@ -1,13 +1,16 @@
 %h1.centered UMTS Secret Santa
 - if @registered_count < @expected_count
   .row
-    .col-lg-6.col-lg-offset-3
+    .col-lg-8.col-lg-offset-2
       .status-text
         There are
         = @expected_count
-        participants this year, of whom
+        participants expected this year, of whom
         = @registered_count
         have registered.
+        %br
+        Once the expected number of participants have registered,
+        return here to find out who your giftee is!
   .row= render partial: 'register_form'
 - elsif @claimed_count < @expected_count
   .row

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'coffee-rails'
 gem 'haml'
 gem 'haml-rails'
 gem 'mysql2'
@@ -9,7 +10,6 @@ gem 'snappconfig'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
-  gem 'rails-assets-jquery'
 end
 
 group :assets do

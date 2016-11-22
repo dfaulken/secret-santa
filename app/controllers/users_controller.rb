@@ -12,9 +12,11 @@ class UsersController < ApplicationController
   end
 
   def register
-    if User.create name: params.require(:name)
-      head :ok
-    else head :unprocessable_entity
+    user = User.new name: params.require(:name)
+    if user.save
+      flash[:notice] = "Welcome #{user.name}!"
+    else flash[:error] = "Whoops! Looks like you've already signed up!"
     end
+    redirect_to users_path
   end
 end

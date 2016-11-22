@@ -20,10 +20,36 @@ body{
   background-size: cover;
 }
 
+
+.panel-default{
+  background: gray;
+  margin-top: 2em;
+  opacity: 0.9;
+}
+
 .panel-body{
   margin: 1em;
 }
 
 .centered{
   text-align: center;
+}
+
+.flash{
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 0.25em auto;
+  padding: 0.25em;
+  text-align: center;
+  width: 95%;
+}
+
+.flash.error{
+  border: 2px solid #8d201e;
+  background-color: #ffbaba;
+}
+
+.flash.notice{
+  border: 2px solid #003a5b;
+  background-color: lightgreen;
 }
