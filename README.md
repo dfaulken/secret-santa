@@ -1,24 +1,11 @@
-# README
+# secret-santa
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails 5 app built in a night for the office secret Santa gift exchange.
 
-Things you may want to cover:
+Participants register and then draw names out of the hat, like you'd expect.
 
-* Ruby version
+## Setup
 
-* System dependencies
+Create your own versions of the `application.yml` and `database.yml` files.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+In the `application.yml` file, specify the number of participants which the system should expect.
