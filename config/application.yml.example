@@ -1,0 +1,4 @@
+# The number of users in the pool.
+# After this number of users have registered,
+# we move into the 'picking out of a hat' phase.
+user_count: 5
