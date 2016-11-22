@@ -41,7 +41,12 @@ class UsersController < ApplicationController
   private
 
   def check_admin_password
-    unless params.require(:password) == CONFIG.fetch(:admin_password)
+    params.permit(:password)
+    password = params[:password]
+    if password.blank?
+      flash[:error] = 'You must supply a password.'
+      redirect_to :back and return
+    elsif password != CONFIG.fetch(:admin_password)
       flash[:error] = 'Incorrect password.'
       redirect_to :back and return
     end
