@@ -16,3 +16,4 @@ development:
 production:
   <<: *default
   database: secret_santa_production
+  password: <%= ENV['SECRET_SANTA_DB_PASSWORD'] %>
