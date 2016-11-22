@@ -2,7 +2,13 @@ class UsersController < ApplicationController
   def claim
     user = User.unclaimed.sample
     user.claim!
-    render json: { name: user.name }
+    flash[:notice] = <<-NOTICE.strip_heredoc
+      Your giftee is #{user.name}!
+      Be sure to write their name down,
+      or we'll have to reset the whole thing.
+      This is not exactly a robust system.
+    NOTICE
+    redirect_to root_path
   end
 
   def index
@@ -17,6 +23,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Welcome #{user.name}!"
     else flash[:error] = "Whoops! Looks like you've already signed up!"
     end
-    redirect_to users_path
+    redirect_to root_path
   end
 end

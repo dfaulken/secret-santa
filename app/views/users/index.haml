@@ -7,7 +7,10 @@
         = @expected_count
         participants expected this year, of whom
         = @registered_count
-        have registered.
+        have registered:
+        %ul.user-list
+          - User.all.each do |user|
+            %li= user.name
         %br
         Once the expected number of participants have registered,
         return here to find out who your giftee is!

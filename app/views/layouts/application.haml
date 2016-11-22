@@ -12,5 +12,5 @@
         - if flash[:notice].present?
           .flash.notice= flash[:notice]
         - if flash[:error].present?
-          .error= flash[:error]
+          .flash.error= flash[:error]
         .panel-body= yield
