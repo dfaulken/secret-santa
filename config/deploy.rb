@@ -22,6 +22,15 @@ set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 
+set :linked_files, fetch(:linked_files, []).push(
+  'config/application.yml',
+  'config/database.yml'
+)
+
+set :linked_dirs, fetch(:linked_dirs, []).push(
+  'log'
+)
+
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
