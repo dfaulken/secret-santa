@@ -123,6 +123,7 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    puma (3.6.0)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -207,6 +208,7 @@ DEPENDENCIES
   haml-rails
   listen
   mysql2
+  puma
   rails (~> 5.0)
   rails-assets-bootstrap!
   sass-rails
