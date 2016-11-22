@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :check_admin_password, only: :destroy
+
   def claim
     user = User.unclaimed.sample
     user.claim!
@@ -11,10 +13,20 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    user = User.find params.require(:id)
+    user.destroy!
+    flash[:notice] = "#{user.name} has been removed."
+    redirect_to root_path
+  end
+
   def index
     @expected_count = CONFIG.fetch :user_count
     @registered_count = User.count
     @claimed_count = User.claimed.count
+  end
+
+  def manage
   end
 
   def register
@@ -25,4 +37,14 @@ class UsersController < ApplicationController
     end
     redirect_to root_path
   end
+
+  private
+
+  def check_admin_password
+    unless params.require(:password) == CONFIG.fetch(:admin_password)
+      flash[:error] = 'Incorrect password.'
+      redirect_to :back and return
+    end
+  end
+
 end

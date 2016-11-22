@@ -2,3 +2,6 @@
 # After this number of users have registered,
 # we move into the 'picking out of a hat' phase.
 user_count: 5
+
+# The user management password.
+admin_password: bananas

@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root 'users#index'
 
-  resources :users, only: :index do
+  resources :users, only: %i(destroy index) do
     collection do
-      post :register
       post :claim
+      get  :manage
+      post :register
     end
   end
 end

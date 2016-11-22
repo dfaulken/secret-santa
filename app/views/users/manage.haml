@@ -1,0 +1,26 @@
+%h1.centered Manage Users
+.row
+  .col-lg-10.col-lg-offset-1
+    %table.users
+      %thead
+        %tr
+          %th Name
+          %th Registered
+          %th Taken?
+          %th
+      %tbody
+        - User.all.each do |user|
+          %tr
+            %td= user.name
+            %td= user.created_at.strftime '%A, %B %e, %Y — %l:%M %P'
+            %td
+              - if user.taken?
+                Yes
+              - else
+                No
+            %td
+              = form_tag user_path(user), method: :delete, class: 'form-inline' do
+                .form-group
+                  = password_field_tag :password, '', { placeholder: 'Admin password', class: 'form-control' }
+                .form-group
+                  = button_tag 'Remove', class: 'btn btn-destroy btn-primary form-control'

@@ -31,4 +31,5 @@ end
 group :development, :test do
   gem 'better_errors', require: false
   gem 'binding_of_caller', require: false
+  gem 'pry-byebug'
 end

@@ -6,3 +6,16 @@
 .user-list{
   margin-top: 2em;
 }
+
+table.users{
+  th, td{
+    padding: 5px 1em;
+  }
+  th{
+    border-bottom: 2px solid grey;
+  }
+
+  .btn-destroy{
+    background: #b73434;
+  }
+}
