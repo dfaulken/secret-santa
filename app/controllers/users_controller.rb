@@ -6,9 +6,9 @@ class UsersController < ApplicationController
   end
 
   def index
+    @expected_count = CONFIG.fetch :user_count
     @registered_count = User.count
     @claimed_count = User.claimed.count
-    @expected_count = CONFIG.fetch :user_count
   end
 
   def register

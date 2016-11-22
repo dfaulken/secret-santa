@@ -1,1 +1,18 @@
-%h1 Secret Santa
+%h1 UMTS Secret Santa
+
+- if @registered_count < @expected_count
+  There are
+  = @expected_count
+  participants this year, of whom
+  = @registered_count
+  have registered.
+- elsif @claimed_count < @expected_count
+  = @claimed_count
+  out of 
+  = @expected_count
+  participants have a secret Santa.
+- else
+  All
+  = @expected_count
+  participants have a secret Santa.
+  Let the fun begin!
