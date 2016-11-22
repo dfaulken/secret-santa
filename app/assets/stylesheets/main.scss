@@ -1,5 +1,9 @@
 .panel-default{
   background: gray;
   margin-top: 2em;
-  opacity: 0.8;
+  opacity: 0.9;
+
+  .panel-body{
+    opacity: 1;
+  }
 }

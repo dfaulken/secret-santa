@@ -1,18 +1,28 @@
-%h1 UMTS Secret Santa
-
+%h1.centered UMTS Secret Santa
 - if @registered_count < @expected_count
-  There are
-  = @expected_count
-  participants this year, of whom
-  = @registered_count
-  have registered.
+  .row
+    .col-lg-6.col-lg-offset-3
+      .status-text
+        There are
+        = @expected_count
+        participants this year, of whom
+        = @registered_count
+        have registered.
+  .row= render partial: 'register_form'
 - elsif @claimed_count < @expected_count
-  = @claimed_count
-  out of 
-  = @expected_count
-  participants have a secret Santa.
+  .row
+    .col-lg-6.col-lg-offset-3
+      .status-text
+        = @claimed_count
+        out of 
+        = @expected_count
+        participants have a secret Santa.
+  .row= render partial: 'claim_button'
 - else
-  All
-  = @expected_count
-  participants have a secret Santa.
-  Let the fun begin!
+  .row
+    .col-lg-6.col-lg-offset-3
+      .status-text
+        All
+        = @expected_count
+        participants have a secret Santa.
+        Let the fun begin!

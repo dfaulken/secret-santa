@@ -12,7 +12,9 @@ class UsersController < ApplicationController
   end
 
   def register
-    User.create name: params.require(:name)
-    render json: { count: User.count }
+    if User.create name: params.require(:name)
+      head :ok
+    else head :unprocessable_entity
+    end
   end
 end

@@ -19,3 +19,11 @@ body{
   background-image: url('xmastree.jpg');
   background-size: cover;
 }
+
+.panel-body{
+  margin: 1em;
+}
+
+.centered{
+  text-align: center;
+}
