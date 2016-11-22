@@ -8,6 +8,7 @@ gem 'puma'
 gem 'rails', '~> 5.0'
 gem 'sass-rails'
 gem 'snappconfig'
+gem 'uglifier'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
