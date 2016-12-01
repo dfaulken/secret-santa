@@ -5,18 +5,13 @@ class UsersController < ApplicationController
   def approve
     @user.approve!
     flash[:notice] = "#{@user.name} has been approved."
-    redirect_to :back
+    redirect_back fallback_location: manage_users_path
   end
 
   def claim
     user = User.unclaimed.without(current_user).sample
-    user.claim!
-    flash[:notice] = <<-NOTICE.strip_heredoc
-      Your giftee is #{user.name}!
-      Be sure to write their name down,
-      or we'll have to reset the whole thing.
-      This is not exactly a robust system.
-    NOTICE
+    user.claim_for current_user
+    flash[:notice] = "Your giftee is #{user.name}!"
     redirect_to root_path
   end
 
@@ -24,6 +19,7 @@ class UsersController < ApplicationController
     @expected_count = CONFIG.fetch :user_count
     @registered = User.approved
     @claimed_count = User.claimed.count
+    @giftee = current_user.giftee
   end
 
   def toggle_admin
@@ -35,7 +31,7 @@ class UsersController < ApplicationController
         else "#{@user.name} is no longer an administrator."
         end
     end
-    redirect_to :back
+    redirect_back fallback_location: manage_users_path
   end
 
   def register

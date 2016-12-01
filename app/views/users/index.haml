@@ -22,7 +22,12 @@
         out of 
         = @expected_count
         participants have a secret Santa.
-  .row= render partial: 'claim_button'
+  - if @giftee.present?
+    .row
+      .col-lg-offset-3.col-lg-2
+        Your giftee is #{@giftee.name}.
+  - else
+    .row= render partial: 'claim_button'
 - else
   .row
     .col-lg-6.col-lg-offset-3
