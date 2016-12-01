@@ -6,7 +6,9 @@
         %tr
           %th Name
           %th Registered
+          %th Approved?
           %th Taken?
+          %th Admin?
           %th
       %tbody
         - User.all.each do |user|
@@ -14,14 +16,25 @@
             %td= user.name
             %td= user.created_at.strftime '%A, %B %e, %Y — %l:%M %P'
             %td
+              - if user.approved?
+                Yes
+              - else
+                No
+            %td
               - if user.taken?
                 Yes
               - else
                 No
             %td
-              = form_tag user_path(user), method: :delete, class: 'form-inline' do
-                .form-group
-                  = password_field_tag :password, '', { placeholder: 'Admin password', class: 'form-control' }
-                .form-group
-                  = button_tag 'Remove', class: 'btn btn-destroy btn-primary form-control'
+              - if user.approved?
+                = form_tag toggle_admin_user_path(user), class: 'form-inline' do
+                  .form-group
+                    - if user.admin?
+                      = button_tag 'Remove as admin', class: 'btn btn-destroy btn-primary form-control'
+                    - else
+                      = button_tag 'Make admin', class: 'btn btn-primary form-control'
+              - else
+                = form_tag approve_user_path(user), class: 'form-inline' do
+                  .form-group
+                    = button_tag 'Approve', class: 'btn btn-primary form-control'
 = link_to 'Back', root_path

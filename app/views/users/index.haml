@@ -11,7 +11,8 @@
         %ul.user-list
           - User.all.each do |user|
             %li= user.name
-        = link_to 'Manage users', manage_users_path
+        - if current_user.admin?
+          = link_to 'Manage users', manage_users_path
       .status-text
         Once the expected number of participants have registered,
         return here to find out who your giftee is!

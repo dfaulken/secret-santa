@@ -18,3 +18,5 @@
         .panel-body
           = yield
           .source-link= link_to 'Show me the source!', 'https://github.com/dfaulken/secret-santa'
+          - if user_signed_in?
+            .logout-link= link_to 'Logout', destroy_user_session_path, method: :delete
