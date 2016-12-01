@@ -13,6 +13,8 @@
           .flash.notice= flash[:notice]
         - if flash[:error].present?
           .flash.error= flash[:error]
+        - if flash[:alert].present?
+          .flash.alert= flash[:alert]
         .panel-body
           = yield
           .source-link= link_to 'Show me the source!', 'https://github.com/dfaulken/secret-santa'

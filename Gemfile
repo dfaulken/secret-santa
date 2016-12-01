@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'coffee-rails'
+gem 'devise'
 gem 'haml'
 gem 'haml-rails'
 gem 'mysql2'

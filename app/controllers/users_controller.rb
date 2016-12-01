@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :check_admin_password, only: :destroy
+  before_action :check_admin, only: :destroy
 
   def claim
     user = User.unclaimed.sample
@@ -41,15 +41,7 @@ class UsersController < ApplicationController
   private
 
   def check_admin_password
-    params.permit(:password)
-    password = params[:password]
-    if password.blank?
-      flash[:error] = 'You must supply a password.'
-      redirect_to :back and return
-    elsif password != CONFIG.fetch(:admin_password)
-      flash[:error] = 'Incorrect password.'
-      redirect_to :back and return
-    end
+    head :unauthorized unless current_user.admin?
   end
 
 end
