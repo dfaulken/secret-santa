@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true, uniqueness: true
 
+  scope :approved,  -> { where approved: true }
   scope :claimed,   -> { where taken: true }
   scope :unclaimed, -> { where taken: false }
 

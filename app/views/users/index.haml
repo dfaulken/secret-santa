@@ -1,22 +1,19 @@
 %h1.centered Transit IT Secret Santa
-- if @registered_count < @expected_count
+- if @registered.count < @expected_count
   .row
     .col-lg-8.col-lg-offset-2
       .status-text
         There are
         = @expected_count
         participants expected this year, of whom
-        = @registered_count
-        have registered:
+        = @registered.count
+        have succesfully registered:
         %ul.user-list
-          - User.all.each do |user|
+          - @registered.each do |user|
             %li= user.name
-        - if current_user.admin?
-          = link_to 'Manage users', manage_users_path
       .status-text
         Once the expected number of participants have registered,
         return here to find out who your giftee is!
-  .row= render partial: 'register_form'
 - elsif @claimed_count < @expected_count
   .row
     .col-lg-6.col-lg-offset-3

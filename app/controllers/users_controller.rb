@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   before_action :check_admin, only: %i(approve manage)
-  before_action :find_user, only: %i(approve make_admin)
+  before_action :find_user, only: %i(approve toggle_admin)
 
   def approve
     @user.approve!
-    flash[:notice] = "#{user.name} has been approved."
+    flash[:notice] = "#{@user.name} has been approved."
     redirect_to :back
   end
 
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def index
     @expected_count = CONFIG.fetch :user_count
-    @registered_count = User.count
+    @registered = User.approved
     @claimed_count = User.claimed.count
   end
 
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       flash[:notice] = 
         if @user.admin?
           "#{@user.name} is now an administrator."
-        else "#{user.name} is no longer an administrator."
+        else "#{@user.name} is no longer an administrator."
         end
     end
     redirect_to :back
