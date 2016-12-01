@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'users#index'
 
-  resources :users, only: %i(destroy index) do
+  resources :users, only: :index do
+    member do
+      post :approve
+      post :toggle_admin
+    end
     collection do
       post :claim
       get  :manage

@@ -1,8 +1,15 @@
 class UsersController < ApplicationController
-  before_action :check_admin_password, only: :destroy
+  before_action :check_admin, only: %i(approve manage)
+  before_action :find_user, only: %i(approve toggle_admin)
+
+  def approve
+    @user.approve!
+    flash[:notice] = "#{@user.name} has been approved."
+    redirect_to :back
+  end
 
   def claim
-    user = User.unclaimed.sample
+    user = User.unclaimed.without(current_user).sample
     user.claim!
     flash[:notice] = <<-NOTICE.strip_heredoc
       Your giftee is #{user.name}!
@@ -13,20 +20,22 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def destroy
-    user = User.find params.require(:id)
-    user.destroy!
-    flash[:notice] = "#{user.name} has been removed."
-    redirect_to root_path
-  end
-
   def index
     @expected_count = CONFIG.fetch :user_count
-    @registered_count = User.count
+    @registered = User.approved
     @claimed_count = User.claimed.count
   end
 
-  def manage
+  def toggle_admin
+    @user.toggle :admin
+    if @user.save
+      flash[:notice] = 
+        if @user.admin?
+          "#{@user.name} is now an administrator."
+        else "#{@user.name} is no longer an administrator."
+        end
+    end
+    redirect_to :back
   end
 
   def register
@@ -40,16 +49,12 @@ class UsersController < ApplicationController
 
   private
 
-  def check_admin_password
-    params.permit(:password)
-    password = params[:password]
-    if password.blank?
-      flash[:error] = 'You must supply a password.'
-      redirect_to :back and return
-    elsif password != CONFIG.fetch(:admin_password)
-      flash[:error] = 'Incorrect password.'
-      redirect_to :back and return
-    end
+  def check_admin
+    head :unauthorized unless current_user.admin?
+  end
+
+  def find_user
+    @user = User.find_by id: params.require(:id)
   end
 
 end
